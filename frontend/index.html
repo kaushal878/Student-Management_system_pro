@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sajilo Student Manager Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app fade-in">
+    <aside class="sidebar" id="sidebar">
+      <h1>📚 Sajilo Pro</h1>
+      <nav>
+        <button class="nav-btn active" data-tab="dashboard">Dashboard</button>
+        <button class="nav-btn" data-tab="manage">Student Management</button>
+      </nav>
+      <div class="toggle-wrap">
+        <label class="switch">
+          <input type="checkbox" id="themeToggle" />
+          <span class="slider"></span>
+        </label>
+        <span id="themeLabel">Light Mode ☀️</span>
+      </div>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <button class="menu-btn" id="menuBtn">☰</button>
+        <h2>Sajilo Student Manager Pro</h2>
+        <button class="btn" id="exportBtn">Export CSV</button>
+      </header>
+
+      <section id="dashboard" class="tab-section active">
+        <div class="cards">
+          <article class="card glow">
+            <h3>Total Students</h3>
+            <p id="totalStudents">0</p>
+          </article>
+          <article class="card glow">
+            <h3>Average Marks</h3>
+            <p id="avgMarks">0%</p>
+          </article>
+          <article class="card glow">
+            <h3>Average Attendance</h3>
+            <p id="avgAttendance">0%</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="manage" class="tab-section">
+        <form id="studentForm" class="form card">
+          <h3 id="formTitle">Add Student</h3>
+          <div class="grid-3">
+            <input type="text" id="name" placeholder="Student name" required />
+            <input type="text" id="rollNumber" placeholder="Roll number" required />
+            <input type="text" id="className" placeholder="Class" required />
+          </div>
+          <div class="grid-3">
+            <input type="number" id="math" placeholder="Math" min="0" max="100" value="0" />
+            <input type="number" id="science" placeholder="Science" min="0" max="100" value="0" />
+            <input type="number" id="english" placeholder="English" min="0" max="100" value="0" />
+          </div>
+          <div class="grid-2">
+            <input type="number" id="present" placeholder="Attendance Present" min="0" value="0" />
+            <input type="number" id="absent" placeholder="Attendance Absent" min="0" value="0" />
+          </div>
+          <div class="actions">
+            <button type="submit" class="btn" id="saveBtn">Save Student</button>
+            <button type="button" class="btn secondary" id="cancelEdit">Cancel Edit</button>
+          </div>
+        </form>
+
+        <div class="card">
+          <div class="toolbar">
+            <input type="text" id="searchInput" placeholder="Search by name / roll number" />
+            <input type="text" id="classFilter" placeholder="Filter by class" />
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Roll</th>
+                  <th>Class</th>
+                  <th>Total</th>
+                  <th>%</th>
+                  <th>Attendance %</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="studentsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <div id="loader" class="loader-overlay hidden"><div class="spinner"></div></div>
+
+  <div class="modal hidden" id="confirmModal">
+    <div class="modal-content card">
+      <h3>Confirm Delete</h3>
+      <p>Are you sure you want to delete this student?</p>
+      <div class="actions">
+        <button class="btn danger" id="confirmDeleteBtn">Delete</button>
+        <button class="btn secondary" id="cancelDeleteBtn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
