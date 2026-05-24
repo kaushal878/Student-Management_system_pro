@@ -1,0 +1,12 @@
+{
+  "name": "sajilo-student-manager-pro",
+  "version": "1.0.0",
+  "description": "Professional student management dashboard using Node, Express, and vanilla JS",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

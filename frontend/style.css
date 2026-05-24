@@ -1,0 +1,94 @@
+:root {
+  --bg: #eef2ff;
+  --text: #1f2937;
+  --card: rgba(255, 255, 255, 0.6);
+  --primary: #4f46e5;
+  --secondary: #64748b;
+}
+
+body.dark {
+  --bg: #111827;
+  --text: #f3f4f6;
+  --card: rgba(31, 41, 55, 0.7);
+  --primary: #818cf8;
+  --secondary: #94a3b8;
+}
+
+* { box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+body { margin: 0; background: linear-gradient(120deg, #dbeafe, var(--bg)); color: var(--text); transition: 0.4s; }
+
+.fade-in { animation: fadeIn 0.6s ease-in-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px);} to { opacity: 1; transform: translateY(0);} }
+
+.app { display: flex; min-height: 100vh; }
+.sidebar {
+  width: 260px; padding: 1.25rem; background: var(--card); backdrop-filter: blur(10px);
+  border-right: 1px solid rgba(255,255,255,.2); transition: transform 0.4s ease;
+}
+.sidebar h1 { font-size: 1.2rem; }
+.sidebar nav { display: flex; flex-direction: column; gap: .75rem; margin: 1rem 0; }
+.nav-btn { padding: .75rem; border: none; border-radius: 12px; background: transparent; color: var(--text); cursor: pointer; transition: .3s; }
+.nav-btn.active, .nav-btn:hover { background: rgba(79,70,229,.2); }
+
+.toggle-wrap { margin-top: auto; display: flex; align-items: center; gap: .75rem; }
+.switch { position: relative; width: 44px; height: 24px; display: inline-block; }
+.switch input { display: none; }
+.slider { position: absolute; inset: 0; background: #cbd5e1; border-radius: 999px; }
+.slider::before { content: ''; position: absolute; width: 20px; height: 20px; left: 2px; top: 2px; border-radius: 50%; background: white; transition: 0.3s; }
+input:checked + .slider::before { transform: translateX(20px); }
+
+.content { flex: 1; padding: 1rem 1.25rem; }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.menu-btn { display: none; }
+
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
+.card {
+  background: var(--card); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.25);
+  border-radius: 16px; padding: 1rem; box-shadow: 0 10px 20px rgba(15, 23, 42, .08); transition: 0.35s;
+}
+.glow:hover { box-shadow: 0 0 0 2px rgba(79,70,229,.35), 0 12px 24px rgba(79,70,229,.25); transform: translateY(-2px); }
+
+.form { margin: 1rem 0; }
+.grid-3, .grid-2 { display: grid; gap: .75rem; margin-bottom: .75rem; }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+input { width: 100%; padding: .75rem; border-radius: 10px; border: 1px solid #d1d5db; }
+
+.btn {
+  padding: .65rem 1rem; border: none; border-radius: 10px; background: var(--primary); color: white;
+  cursor: pointer; transition: transform .3s, opacity .3s;
+}
+.btn:hover { transform: scale(1.04); opacity: .95; }
+.btn.secondary { background: var(--secondary); }
+.btn.danger { background: #dc2626; }
+.actions { display: flex; gap: .75rem; }
+
+.toolbar { display: grid; grid-template-columns: 2fr 1fr; gap: .75rem; margin-bottom: .75rem; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: .75rem .5rem; border-bottom: 1px solid rgba(148,163,184,.3); text-align: left; }
+
+.tab-section { display: none; }
+.tab-section.active { display: block; }
+
+.toast {
+  position: fixed; right: 1rem; bottom: 1rem; background: #0f172a; color: #fff;
+  padding: .7rem 1rem; border-radius: 10px; opacity: 0; transform: translateY(10px); transition: .35s;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+
+.loader-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.2); display: grid; place-items: center; }
+.hidden { display: none; }
+.spinner { width: 48px; height: 48px; border: 5px solid #cbd5e1; border-top: 5px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.modal { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,.4); }
+.modal-content { max-width: 360px; width: 90%; }
+
+@media (max-width: 900px) {
+  .cards, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+  .sidebar { position: fixed; inset: 0 auto 0 0; z-index: 20; transform: translateX(-100%); animation: slideIn .45s forwards; }
+  .sidebar.open { transform: translateX(0); }
+  .menu-btn { display: inline-block; padding: .55rem .8rem; border-radius: 10px; border: none; }
+}
+@keyframes slideIn { from { transform: translateX(-100%);} to { transform: translateX(0);} }
